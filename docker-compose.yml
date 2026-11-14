@@ -1,0 +1,26 @@
+# Both services bind to 127.0.0.1 only. On a server, put a reverse proxy
+# (Caddy/nginx) in front of the web service for TLS; see README "Deploying".
+services:
+  api:
+    build: .
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Requests reach the API through the web proxy, which forwards the
+      # X-Forwarded-For header set by the reverse proxy in front of it.
+      FORWARDED_HOPS: "1"
+    ports:
+      - "127.0.0.1:8000:8000"
+    restart: unless-stopped
+
+  web:
+    build: ./web
+    environment:
+      API_INTERNAL_URL: http://api:8000
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped

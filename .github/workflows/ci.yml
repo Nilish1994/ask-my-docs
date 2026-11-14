@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend:
+    name: Lint and test (Claude mocked)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      # tests/conftest.py removes any Anthropic credentials and points the SDK
+      # at an unroutable address; every Claude call goes to a fake client.
+      - run: uv run pytest -q
+
+  retrieval-eval:
+    name: Retrieval eval (no LLM calls)
+    runs-on: ubuntu-latest
+    env:
+      FASTEMBED_CACHE_PATH: ${{ github.workspace }}/.cache/fastembed
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen --no-dev
+      - name: Cache FastAPI docs and embedding model
+        uses: actions/cache@v4
+        with:
+          path: |
+            data/raw
+            .cache/fastembed
+          key: corpus-${{ hashFiles('ingest/fetch_docs.py', 'retrieval/embeddings.py') }}
+      - name: Build index (fetch docs, chunk, embed)
+        run: uv run python -m ingest.build_index
+      - name: Evaluate BM25 vs embeddings vs hybrid
+        run: |
+          uv run python -m eval.run_retrieval_eval --json eval/results.json --min-hit5 0.85
+          {
+            echo "## Retrieval eval"
+            echo
+            uv run python -m eval.run_retrieval_eval --markdown
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: retrieval-eval
+          path: eval/results.json
+
+  web:
+    name: Next.js lint and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npx eslint .
+      - run: npx next build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+
+  docker:
+    name: Docker images build
+    runs-on: ubuntu-latest
+    needs: [backend, web]
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose build

@@ -1,0 +1,41 @@
+[project]
+name = "ask-my-docs"
+version = "0.1.0"
+description = "Documentation Q&A with clickable citations and measured retrieval quality (BM25 vs embeddings vs hybrid)."
+license = "MIT"
+authors = [{ name = "Nilish Aluthwatta" }]
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=2.8.0",
+    "fastapi>=0.162.7",
+    "fastembed>=0.9.1",
+    "httpx>=0.28.1",
+    "nltk>=3.10.4",
+    "numpy>=2.5.4",
+    "pydantic-settings>=2.16.3",
+    "pypdf>=7.1.0",
+    "python-multipart>=0.0.33",
+    "uvicorn[standard]>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.5",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["data", "web"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"answer/claude.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning"]

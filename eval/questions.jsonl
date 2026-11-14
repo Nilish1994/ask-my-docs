@@ -1,0 +1,42 @@
+{"id": "q01", "style": "keyword", "question": "How do I declare an optional query parameter with a default value?", "relevant_pages": ["tutorial/query-params"]}
+{"id": "q02", "style": "paraphrase", "question": "My endpoint should reject a search term shorter than 3 characters. How?", "relevant_pages": ["tutorial/query-params-str-validations"]}
+{"id": "q03", "style": "keyword", "question": "How do I read a value from the URL path, like an item id, as an int?", "relevant_pages": ["tutorial/path-params"]}
+{"id": "q04", "style": "paraphrase", "question": "How can I make sure a number in the URL is between 1 and 1000?", "relevant_pages": ["tutorial/path-params-numeric-validations"]}
+{"id": "q05", "style": "keyword", "question": "How do I accept a JSON request body using a Pydantic model?", "relevant_pages": ["tutorial/body"]}
+{"id": "q06", "style": "paraphrase", "question": "I need two separate objects, a user and an item, in the same POST payload. How do I do that?", "relevant_pages": ["tutorial/body-multiple-params"]}
+{"id": "q07", "style": "keyword", "question": "How do I add validation and metadata to fields inside a Pydantic model with Field?", "relevant_pages": ["tutorial/body-fields"]}
+{"id": "q08", "style": "paraphrase", "question": "Can a model contain a list of other models, like an item with several images?", "relevant_pages": ["tutorial/body-nested-models"]}
+{"id": "q09", "style": "paraphrase", "question": "How do I avoid sending the password hash back to the client in the response?", "relevant_pages": ["tutorial/response-model", "tutorial/extra-models"]}
+{"id": "q10", "style": "keyword", "question": "How do I set the status code 201 for a create endpoint?", "relevant_pages": ["tutorial/response-status-code"]}
+{"id": "q11", "style": "keyword", "question": "How do I raise an HTTPException to return a 404 error?", "relevant_pages": ["tutorial/handling-errors", "reference/exceptions"]}
+{"id": "q12", "style": "paraphrase", "question": "I want every validation failure to come back in my own error format instead of the default 422 body.", "relevant_pages": ["tutorial/handling-errors"]}
+{"id": "q13", "style": "keyword", "question": "How do I receive form fields instead of JSON?", "relevant_pages": ["tutorial/request-forms", "tutorial/request-form-models"]}
+{"id": "q14", "style": "paraphrase", "question": "How do users send me a picture from a browser form, and how do I save it on the server?", "relevant_pages": ["tutorial/request-files", "tutorial/request-forms-and-files", "reference/uploadfile"]}
+{"id": "q15", "style": "keyword", "question": "How do I read a header like User-Agent in a path operation?", "relevant_pages": ["tutorial/header-params", "tutorial/header-param-models"]}
+{"id": "q16", "style": "keyword", "question": "How do I read a cookie value in my endpoint?", "relevant_pages": ["tutorial/cookie-params", "tutorial/cookie-param-models"]}
+{"id": "q17", "style": "paraphrase", "question": "Several endpoints need the same pagination arguments. How do I share that logic without copy-pasting?", "relevant_pages": ["tutorial/dependencies/index", "tutorial/dependencies/classes-as-dependencies"]}
+{"id": "q18", "style": "paraphrase", "question": "How do I open a database session per request and make sure it is always closed afterwards?", "relevant_pages": ["tutorial/dependencies/dependencies-with-yield", "tutorial/sql-databases"]}
+{"id": "q19", "style": "keyword", "question": "How do I apply a dependency to every path operation in the whole application?", "relevant_pages": ["tutorial/dependencies/global-dependencies"]}
+{"id": "q20", "style": "keyword", "question": "How do I hash passwords and issue JWT access tokens?", "relevant_pages": ["tutorial/security/oauth2-jwt"]}
+{"id": "q21", "style": "paraphrase", "question": "How do I get the logged-in user object inside my endpoint from the bearer token?", "relevant_pages": ["tutorial/security/get-current-user", "tutorial/security/simple-oauth2"]}
+{"id": "q22", "style": "paraphrase", "question": "Some tokens should only be allowed to read items, not delete them. How do I model permissions like that?", "relevant_pages": ["advanced/security/oauth2-scopes"]}
+{"id": "q23", "style": "keyword", "question": "How do I protect an endpoint with HTTP Basic auth username and password?", "relevant_pages": ["advanced/security/http-basic-auth"]}
+{"id": "q24", "style": "keyword", "question": "How do I enable CORS so my React frontend on another origin can call the API?", "relevant_pages": ["tutorial/cors"]}
+{"id": "q25", "style": "paraphrase", "question": "I want to log how long every request takes. Where do I hook that in?", "relevant_pages": ["tutorial/middleware", "advanced/middleware"]}
+{"id": "q26", "style": "paraphrase", "question": "After a user signs up I want to send a welcome email without making them wait for it.", "relevant_pages": ["tutorial/background-tasks", "reference/background"]}
+{"id": "q27", "style": "paraphrase", "question": "My app has grown too big for one file. How should I split the routes across modules?", "relevant_pages": ["tutorial/bigger-applications", "reference/apirouter"]}
+{"id": "q28", "style": "keyword", "question": "How do I write tests for my API with TestClient and pytest?", "relevant_pages": ["tutorial/testing", "reference/testclient"]}
+{"id": "q29", "style": "paraphrase", "question": "In my tests I want to swap the real authentication function for a fake one.", "relevant_pages": ["advanced/testing-dependencies"]}
+{"id": "q30", "style": "paraphrase", "question": "Where do I load a machine learning model once when the server boots and release it on shutdown?", "relevant_pages": ["advanced/events"]}
+{"id": "q31", "style": "keyword", "question": "How do I read settings and secrets from environment variables with pydantic-settings?", "relevant_pages": ["advanced/settings", "environment-variables"]}
+{"id": "q32", "style": "paraphrase", "question": "How should I package my app into a container image for production?", "relevant_pages": ["deployment/docker"]}
+{"id": "q33", "style": "keyword", "question": "How do I run Uvicorn with multiple worker processes?", "relevant_pages": ["deployment/server-workers", "deployment/manually"]}
+{"id": "q34", "style": "paraphrase", "question": "My API sits under /api/v1 behind Nginx and the docs page can't find openapi.json. What do I configure?", "relevant_pages": ["advanced/behind-a-proxy"]}
+{"id": "q35", "style": "keyword", "question": "How do I return an HTML page or a file download instead of JSON?", "relevant_pages": ["advanced/custom-response", "reference/responses", "advanced/templates"]}
+{"id": "q36", "style": "paraphrase", "question": "How do I push live updates to the browser over a long-lived two-way connection?", "relevant_pages": ["advanced/websockets", "reference/websockets"]}
+{"id": "q37", "style": "paraphrase", "question": "How do I hide the interactive docs pages when running in production?", "relevant_pages": ["how-to/conditional-openapi", "tutorial/metadata"]}
+{"id": "q38", "style": "keyword", "question": "Should I define my path operation functions with async def or plain def?", "relevant_pages": ["async"]}
+{"id": "q39", "style": "paraphrase", "question": "How do I connect to Postgres or SQLite and store rows using SQLModel?", "relevant_pages": ["tutorial/sql-databases"]}
+{"id": "q40", "style": "paraphrase", "question": "How can I give my API a title, a description and a version that show up on the docs page?", "relevant_pages": ["tutorial/metadata"]}
+{"id": "q41", "style": "keyword", "question": "How do I set a cookie on the response?", "relevant_pages": ["advanced/response-cookies"]}
+{"id": "q42", "style": "paraphrase", "question": "I have an old Flask app. Can I serve it from inside my new FastAPI application?", "relevant_pages": ["advanced/wsgi"]}
