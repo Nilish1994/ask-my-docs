@@ -5,7 +5,7 @@
 
 **Documentation Q&A that shows its work.** Ask a question about the FastAPI docs. Claude streams back an answer in which every claim carries a citation chip linking to the exact docs section. A side panel shows which sections were retrieved and why, with BM25, embedding and fused scores. The retrieval layer is measured, not assumed: a 42-question eval compares BM25, embeddings and hybrid search, and runs in CI.
 
-**Live demo:** [askdocs.imisstech.com.au](https://askdocs.imisstech.com.au) *(coming soon)*
+**Live demo:** [askdocs.imisstech.com.au](https://askdocs.imisstech.com.au) (10 questions per hour per visitor)
 
 ![Ask My Docs: a streamed answer with citation chips, next to the retrieval panel showing BM25, vector and fused scores per chunk](docs/screenshot.png)
 
